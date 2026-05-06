@@ -290,7 +290,29 @@ app.delete('/api/admin/alerts/:id', authMiddleware, adminMiddleware, (req, res) 
   res.json({ success: true, message: 'Deleted' });
 });
 
-// ============ HEALTH ============
+// ============ ROOT & HEALTH ============
+app.get('/', (req, res) => {
+  res.send(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lebanon Red Alert API</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0f;color:#f0f0f5;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.c{max-width:600px;padding:2rem;text-align:center}.badge{background:#DC2626;color:#fff;padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:700;display:inline-block;margin-bottom:1rem}
+h1{font-size:2rem;margin-bottom:.5rem}h1 span{color:#DC2626}.sub{color:#8888a0;margin-bottom:2rem}
+.endpoints{text-align:left;background:#12121a;border:1px solid #2a2a3e;border-radius:12px;padding:1.5rem;margin-top:1.5rem}
+.endpoints h3{color:#DC2626;margin-bottom:1rem;font-size:.9rem;text-transform:uppercase;letter-spacing:1px}
+.ep{padding:.4rem 0;font-family:monospace;font-size:.85rem;color:#a0a0b8}.ep a{color:#60a5fa;text-decoration:none}.ep a:hover{text-decoration:underline}
+.footer{margin-top:2rem;color:#5a5a70;font-size:.75rem}</style></head>
+<body><div class="c"><div class="badge">● LIVE</div><h1>🚨 Lebanon <span>Red Alert</span> API</h1><p class="sub">Real-time security alert system for Lebanon</p>
+<div class="endpoints"><h3>📡 API Endpoints</h3>
+<div class="ep">GET <a href="/api/health">/api/health</a> — Status check</div>
+<div class="ep">GET <a href="/api/alerts">/api/alerts</a> — All verified alerts</div>
+<div class="ep">GET <a href="/api/alerts/stats">/api/alerts/stats</a> — Statistics</div>
+<div class="ep">GET <a href="/api/alerts/map">/api/alerts/map</a> — Map data</div>
+<div class="ep">GET <a href="/api/alerts/regions">/api/alerts/regions</a> — By region</div>
+<div class="ep">GET <a href="/api/sources/status">/api/sources/status</a> — Data sources</div>
+<div class="ep">POST /api/auth/login — Login</div>
+<div class="ep">POST /api/auth/register — Register</div>
+</div><p class="footer">Powered by Ajwa2 API • JSON File Storage • Socket.IO Real-time</p></div></body></html>`);
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString(), service: 'Lebanon Red Alert API 🚨', storage: 'json-file', sources: ['ajwa2.com', 'redalertlb.com', 'admin', 'user_reports'] });
 });
