@@ -1,4 +1,5 @@
 services:
+  # Backend API
   - type: web
     name: lebalert-api
     runtime: node
@@ -13,5 +14,19 @@ services:
         generateValue: true
       - key: PORT
         value: 10000
-      - key: FRONTEND_URL
-        value: https://your-frontend-url.vercel.app
+
+  # Web Frontend
+  - type: web
+    name: lebalert-web
+    runtime: node
+    region: frankfurt
+    rootDir: web
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: https://lebalert-api.onrender.com
+      - key: PORT
+        value: 10000
